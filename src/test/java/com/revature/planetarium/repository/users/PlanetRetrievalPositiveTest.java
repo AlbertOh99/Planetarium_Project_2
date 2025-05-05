@@ -17,13 +17,14 @@ public class PlanetRetrievalPositiveTest {
     private PlanetDao planetDao;
     private Planet negativePlanet;
 
-    @Parameterized.Parameter
-    public int userId = 1;
+
+    private static int userId;
 
     @Before
     public void setup() throws IOException, InterruptedException {
         TestUtilities.resetDatabase();
         planetDao = new PlanetDaoImp();
+        userId = 1;
     }
 
     @Test

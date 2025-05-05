@@ -15,18 +15,21 @@ import java.util.List;
 
 public class PlanetRetrievalNegativeTest {
     private PlanetDao planetDao;
+    private String planetDeleteName;
 
-    @Parameterized.Parameter
-    public String planetDeleteName = "EarthGibberish";
+
+    private static int userId;
 
     @Before
     public void setup() throws IOException, InterruptedException {
         TestUtilities.resetDatabase();
         planetDao = new PlanetDaoImp();
+        userId = 5;
     }
 
     @Test
-    public void planetDeletionPositiveTest() throws SQLException {
-        Assert.assertFalse(planetDao.deletePlanet(planetDeleteName));
+    public void planetRetrievalNegativeTest() throws SQLException {
+        List<Planet> result = planetDao.readPlanetsByOwner(userId);
+        Assert.assertTrue(result.isEmpty());
     }
 }
