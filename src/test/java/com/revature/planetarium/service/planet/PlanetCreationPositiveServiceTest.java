@@ -1,4 +1,4 @@
-package com.revature.planetarium.repository.users;
+package com.revature.planetarium.service.planet;
 
 import com.revature.planetarium.entities.Planet;
 import com.revature.planetarium.repository.planet.PlanetDao;
@@ -9,8 +9,9 @@ import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.junit.runners.Parameterized;
-import org.junit.runners.Parameterized.Parameters;
 import org.junit.runners.Parameterized.Parameter;
+import org.junit.runners.Parameterized.Parameters;
+import org.mockito.Mockito;
 
 import javax.imageio.ImageIO;
 import java.awt.image.BufferedImage;
@@ -21,10 +22,12 @@ import java.sql.SQLException;
 import java.util.Optional;
 
 @RunWith(Parameterized.class)
-public class PlanetCreationPositiveTest {
+public class PlanetCreationPositiveServiceTest {
 
     private PlanetDao planetDao;
+    private PlanetService planetService;
     private Planet positivePlanet;
+    private Planet stubbedPlanet;
 
     @Parameter(0)
     public String planetName;
@@ -38,9 +41,11 @@ public class PlanetCreationPositiveTest {
     @Parameters
     public static Object[][] inputs() throws IOException {
         return new Object[][]{
-                {"E", 1, convertToByte(ImageIO.read(new File("src/test/resources/Celestial-Images/moon-1.jpg")))},
-                {"ThePlanetNameIs30CharactersNow", 1, convertToByte(ImageIO.read(new File("src/test/resources/Celestial-Images/moon-1.jpg")))},
-                {"E-arth_3", 1, convertToByte(ImageIO.read(new File("src/test/resources/Celestial-Images/moon-1.jpg")))},
+                {"E", 1, null},
+                {"ThePlanetNameIs30CharactersNow", 1, null},
+                {"E-arth_3", 1, null},
+                {"E", 1, convertToByte(ImageIO.read(new File("src/test/resources/Celestial-Images/planet-2.jpg")))},
+                {"E", 1, convertToByte(ImageIO.read(new File("src/test/resources/Celestial-Images/planet-5.png")))},
                 {"E", 1, null}
         };
     }
@@ -53,15 +58,18 @@ public class PlanetCreationPositiveTest {
     @Before
     public void setup() throws IOException, InterruptedException {
         TestUtilities.resetDatabase();
-        planetDao = new PlanetDaoImp();
-        positivePlanet = new Planet(0,planetName, ownerId, imageData);
+        planetDao = Mockito.mock(PlanetDaoImp.class);
+        planetService = new PlanetServiceImp(planetDao);
+        positivePlanet = new Planet(0, planetName, ownerId, imageData);
+        // Planet returned to simulate getting our new planet from the database
+        stubbedPlanet = new Planet(3, planetName, ownerId, imageData);
     }
 
     @Test
-    public void planetCreationPositiveTest() throws SQLException {
-        Optional<Planet> result = planetDao.createPlanet(positivePlanet);
-        Assert.assertTrue(result.isPresent());
-        Planet returnedPlanet = result.get();
-        Assert.assertTrue(returnedPlanet.getPlanetId() > 0);
+    public void planetCreationPositiveServiceTest() throws SQLException {
+        Mockito.when(planetDao.readPlanet(positivePlanet.getPlanetName())).thenReturn(Optional.empty());
+        Mockito.when(planetDao.createPlanet(positivePlanet)).thenReturn(Optional.of(stubbedPlanet));
+        boolean result = planetService.createPlanet(ownerId,positivePlanet);
+        Assert.assertTrue(result);
     }
 }

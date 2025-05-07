@@ -1,12 +1,6 @@
-package com.revature.planetarium.repository.users;
+package com.revature.planetarium.repository.planet;
 
 import com.revature.planetarium.entities.Planet;
-import com.revature.planetarium.exceptions.PlanetFail;
-import com.revature.planetarium.exceptions.UserFail;
-import com.revature.planetarium.repository.planet.PlanetDao;
-import com.revature.planetarium.repository.planet.PlanetDaoImp;
-import com.revature.planetarium.service.planet.PlanetService;
-import com.revature.planetarium.service.planet.PlanetServiceImp;
 import com.revature.planetarium.util.TestUtilities;
 import org.junit.Assert;
 import org.junit.Before;
@@ -20,10 +14,9 @@ import java.awt.image.DataBufferByte;
 import java.io.File;
 import java.io.IOException;
 import java.sql.SQLException;
-import java.util.Optional;
 
 @RunWith(Parameterized.class)
-public class PlanetCreationNegativeTest {
+public class PlanetCreationNegativeRepositoryTest {
 
     private PlanetDao planetDao;
     private Planet negativePlanet;
