@@ -7,19 +7,21 @@ import org.junit.runners.Suite;
 
 @RunWith(Suite.class)
 @Suite.SuiteClasses({
+        // Repository Layer Tests
         PlanetCreationNegativeRepositoryTest.class,
         PlanetCreationPositiveRepositoryTest.class,
         PlanetRetrievalNegativeRepositoryTest.class,
         PlanetRetrievalPositiveRepositoryTest.class,
         PlanetDeletionNegativeRepositoryTest.class,
         PlanetDeletionPositiveRepositoryTest.class,
-        //Service Layer Tests
+        // Service Layer Tests
         PlanetCreationNegativeServiceTest.class,
         PlanetCreationPositiveServiceTest.class,
         PlanetRetrievalNegativeServiceTest.class,
         PlanetRetrievalPositiveServiceTest.class,
         PlanetDeletionNegativeServiceTest.class,
         PlanetDeletionPositiveServiceTest.class,
+        // API Layer Tests
 })
 public class PlanetTestSuit {
 }
