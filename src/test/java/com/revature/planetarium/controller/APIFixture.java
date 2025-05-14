@@ -15,7 +15,7 @@ public class APIFixture {
     }
 
     @Before
-    public void resetDatabse() throws IOException, InterruptedException {
+    public void resetDatabase() throws IOException, InterruptedException {
         TestUtilities.resetDatabase();
     }
 }

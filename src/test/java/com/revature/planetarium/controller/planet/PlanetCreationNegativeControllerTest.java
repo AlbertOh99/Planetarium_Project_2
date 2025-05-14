@@ -1,5 +1,6 @@
 package com.revature.planetarium.controller.planet;
 
+import com.revature.planetarium.controller.APIFixture;
 import io.javalin.http.ContentType;
 import io.restassured.response.Response;
 import org.junit.Before;
@@ -22,7 +23,7 @@ import static io.restassured.RestAssured.given;
 import static org.hamcrest.core.IsEqual.equalTo;
 
 @RunWith(Parameterized.class)
-public class PlanetCreationNegativeControllerTest {
+public class PlanetCreationNegativeControllerTest extends APIFixture {
     private Map<String, Object> planetInfo;
     private Map<String, String> loginInfo;
 

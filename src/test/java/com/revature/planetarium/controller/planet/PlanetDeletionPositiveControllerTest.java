@@ -1,10 +1,16 @@
 package com.revature.planetarium.controller.planet;
 
+import com.revature.planetarium.controller.APIFixture;
 import io.javalin.http.ContentType;
 import io.restassured.response.Response;
 import org.junit.Before;
 import org.junit.Test;
+import org.junit.runner.RunWith;
 import org.junit.runners.Parameterized;
+import org.junit.runners.Parameterized.Parameter;
+import org.junit.runners.Parameterized.Parameters;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 import java.awt.image.BufferedImage;
 import java.awt.image.DataBufferByte;
@@ -14,47 +20,22 @@ import java.util.Map;
 
 import static io.restassured.RestAssured.given;
 
-public class PlanetDeletionPositiveControllerTest {
-    private Map<String, Object> planetInfo;
+
+public class PlanetDeletionPositiveControllerTest extends APIFixture {
+
+
     private Map<String, String> loginInfo;
-
-    @Parameterized.Parameter(0)
-    public String planetName;
-
-    @Parameterized.Parameter(1)
-    public int ownerId;
-
-    @Parameterized.Parameter(2)
-    public String imageData;
-
-
-    @Parameterized.Parameters
-    public static Object[][] inputs() throws IOException {
-        return new Object[][]{
-                {"E", 1, null},
-                {"ThePlanetNameIs30CharactersNow", 1, null},
-                {"E-arth _3", 1, null},
-                {"Earth2", 1, null},
-                {"E", 1, "compressed.jpg"},
-                {"E", 1, "compressed.png"}
-        };
-    }
-
-
-    // To prevent errors from happening, converting the image into a byte array as a method instead of in the new planet
-    public static byte[] convertToByte(BufferedImage image){
-        return ((DataBufferByte) image.getData().getDataBuffer()).getData();
-    }
+    private String planetName;
+    private int ownerId;
 
     @Before
-    public void setup(){
+    public void setup() {
         this.loginInfo = new HashMap<>();
         this.loginInfo.put("username", "Batman");
         this.loginInfo.put("password", "Iamthenight1939");
 
-        this.planetInfo = new HashMap<>();
-        this.planetInfo.put("planetName", planetName);
-        this.planetInfo.put("ownerId", ownerId);
+        ownerId = 1;
+        planetName = "Earth";
     }
 
 
@@ -68,24 +49,11 @@ public class PlanetDeletionPositiveControllerTest {
 
         Map<String, String> cookies = loginResponse.getCookies();
 
-        if(imageData == null){
-            given().contentType(ContentType.JSON).body(planetInfo)
-                    .cookies(cookies)
-                    .when()
-                    .post("planetarium/user/"+ownerId+"/planet")
-                    .then()
-                    .statusCode(201);
-        }
-        else {
-            given()
-                    .multiPart("planetName", planetName)
-                    .multiPart("ownerId", String.valueOf(ownerId))
-                    .multiPart("imageData", imageData)
-                    .cookies(cookies)
-                    .when()
-                    .post("planetarium/user/" + ownerId + "/planet")
-                    .then()
-                    .statusCode(201);
-        }
+        given()
+                .cookies(cookies)
+                .when()
+                .delete("planetarium/owner/" + ownerId + "/planet/" + planetName)
+                .then()
+                .statusCode(204);
     }
 }

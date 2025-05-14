@@ -25,10 +25,7 @@ public class PlanetOwnerIdRetrievalTest {
     private Map<String, String> loginInfo;
     private int ownerId;
 
-    // To prevent errors from happening, converting the image into a byte array as a method instead of in the new planet
-    public static byte[] convertToByte(BufferedImage image){
-        return ((DataBufferByte) image.getData().getDataBuffer()).getData();
-    }
+
 
     @Before
     public void setup(){
