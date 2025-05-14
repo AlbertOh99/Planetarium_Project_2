@@ -1,5 +1,6 @@
 package com.revature.planetarium.testsuits;
 
+import com.revature.planetarium.controller.planet.*;
 import com.revature.planetarium.repository.planet.*;
 import com.revature.planetarium.service.planet.*;
 import org.junit.runner.RunWith;
@@ -7,19 +8,26 @@ import org.junit.runners.Suite;
 
 @RunWith(Suite.class)
 @Suite.SuiteClasses({
+        // Repository Layer Tests
         PlanetCreationNegativeRepositoryTest.class,
         PlanetCreationPositiveRepositoryTest.class,
         PlanetRetrievalNegativeRepositoryTest.class,
         PlanetRetrievalPositiveRepositoryTest.class,
         PlanetDeletionNegativeRepositoryTest.class,
         PlanetDeletionPositiveRepositoryTest.class,
-        //Service Layer Tests
+        // Service Layer Tests
         PlanetCreationNegativeServiceTest.class,
         PlanetCreationPositiveServiceTest.class,
         PlanetRetrievalNegativeServiceTest.class,
         PlanetRetrievalPositiveServiceTest.class,
         PlanetDeletionNegativeServiceTest.class,
         PlanetDeletionPositiveServiceTest.class,
+        // API Layer Tests
+        PlanetCreationPositiveControllerTest.class,
+        PlanetCreationNegativeControllerTest.class,
+        PlanetDeletionPositiveControllerTest.class,
+        PlanetDeletionNegativeControllerTest.class,
+        PlanetOwnerIdRetrievalTest.class
 })
 public class PlanetTestSuit {
 }

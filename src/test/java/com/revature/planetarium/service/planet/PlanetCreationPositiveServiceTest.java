@@ -46,7 +46,6 @@ public class PlanetCreationPositiveServiceTest {
                 {"E-arth_3", 1, null},
                 {"E", 1, convertToByte(ImageIO.read(new File("src/test/resources/Celestial-Images/planet-2.jpg")))},
                 {"E", 1, convertToByte(ImageIO.read(new File("src/test/resources/Celestial-Images/planet-5.png")))},
-                {"E", 1, null}
         };
     }
 

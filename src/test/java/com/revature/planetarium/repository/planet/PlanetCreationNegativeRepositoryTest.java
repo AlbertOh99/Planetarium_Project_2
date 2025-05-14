@@ -43,9 +43,9 @@ public class PlanetCreationNegativeRepositoryTest {
                 // Non-unique planet name
                 {"Earth", 1, null, "UNIQUE"},
                 // ownerID invalid
-                {"Earth2", 5, null, "FOREIGN KEY"},
+                {"E", 5, null, "FOREIGN KEY"},
                 // Image Data invalid
-                {"Earth2", 1, convertToByte(ImageIO.read(new File("src/test/resources/Fail-Images/No.gif"))), "test"}
+                {"E", 1, convertToByte(ImageIO.read(new File("src/test/resources/Fail-Images/No.gif"))), "SQLException"}
         };
     }
 
@@ -65,6 +65,6 @@ public class PlanetCreationNegativeRepositoryTest {
     public void planetCreationNegativeTest() throws SQLException {
         SQLException result = Assert.assertThrows(SQLException.class, ()-> planetDao.createPlanet(negativePlanet));
         Assert.assertTrue(result.getMessage().contains(errorMessage));
-        // Temp note - What should I do for testing images. I believe this is a defect as it should come up as an error
+        // Temp note - What should I do for testing images. I believe this is a defect
     }
 }

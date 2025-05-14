@@ -48,9 +48,9 @@ public class PlanetCreationNegativeServiceTest {
                 // Non-unique planet name
                 {"Earth", 1, null, "Invalid planet name"},
                 // ownerID invalid
-                {"Earth2", 5, null, "Invalid owner identifier"},
+                {"E", 5, null, "Invalid owner identifier"},
                 // Image Data invalid
-                {"Earth2", 1, convertToByte(ImageIO.read(new File("src/test/resources/Fail-Images/No.gif"))), "Invalid file type"}
+                {"E", 1, convertToByte(ImageIO.read(new File("src/test/resources/Fail-Images/No.gif"))), "Invalid file type"}
         };
     }
 
