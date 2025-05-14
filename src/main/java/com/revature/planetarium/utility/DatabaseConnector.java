@@ -14,5 +14,4 @@ public class DatabaseConnector {
         String url = AppConfig.DATABASE_URL;
         return DriverManager.getConnection(url, config.toProperties());
     }
-
 }
