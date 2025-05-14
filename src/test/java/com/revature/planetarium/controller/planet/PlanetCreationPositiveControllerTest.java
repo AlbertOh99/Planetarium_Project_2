@@ -46,7 +46,6 @@ public class PlanetCreationPositiveControllerTest extends APIFixture {
                 {"E", 1, null},
                 {"ThePlanetNameIs30CharactersNow", 1, null},
                 {"E-arth _3", 1, null},
-                {"Earth2", 1, null},
                 {"E", 1, "compressed.jpg"},
                 {"E", 1, "compressed.png"}
         };

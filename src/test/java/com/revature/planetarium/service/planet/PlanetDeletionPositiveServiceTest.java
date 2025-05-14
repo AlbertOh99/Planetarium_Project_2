@@ -41,10 +41,10 @@ public class PlanetDeletionPositiveServiceTest {
     @Test
     public void planetDeletionPositiveTest() throws SQLException {
         Mockito.when(planetDao.readPlanetsByOwner(userId)).thenReturn(stubPlanets);
-//        Mockito.when(planetDao.readPlanetsByOwner(Mockito.anyInt()).isEmpty()).thenReturn(false);
 
         Mockito.when(planetDao.deletePlanet(planetDeleteName)).thenReturn(true);
         boolean result = planetService.deletePlanet(userId, planetDeleteName);
         Assert.assertTrue(result);
+
     }
 }

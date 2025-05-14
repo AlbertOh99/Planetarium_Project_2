@@ -1,1 +1,6 @@
 Integration and Unit tests will go here
+
+Question to ask:
+How should I do the:
+if all data validations pass but the dao does not return a true boolean
+throw unhandled PlanetFail exception with the message "Could not delete the planet"

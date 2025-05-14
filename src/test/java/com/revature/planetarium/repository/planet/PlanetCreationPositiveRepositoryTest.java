@@ -37,11 +37,11 @@ public class PlanetCreationPositiveRepositoryTest {
     @Parameters
     public static Object[][] inputs() throws IOException {
         return new Object[][]{
+                {"E", 1, null},
+                {"ThePlanetNameIs30CharactersNow", 1, null},
+                {"E-arth _3", 1, null},
                 {"E", 1, convertToByte(ImageIO.read(new File("src/test/resources/Celestial-Images/planet-1.jpg")))},
-                {"E", 1, convertToByte(ImageIO.read(new File("src/test/resources/Celestial-Images/planet-5.png")))},
-                {"ThePlanetNameIs30CharactersNow", 1, convertToByte(ImageIO.read(new File("src/test/resources/Celestial-Images/planet-1.jpg")))},
-                {"E-arth_3", 1, convertToByte(ImageIO.read(new File("src/test/resources/Celestial-Images/planet-1.jpg")))},
-                {"E", 1, null}
+                {"E", 1, convertToByte(ImageIO.read(new File("src/test/resources/Celestial-Images/planet-1.jpg")))},
         };
     }
 

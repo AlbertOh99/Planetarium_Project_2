@@ -12,7 +12,7 @@ import java.sql.SQLException;
 public class PlanetDeletionNegativeRepositoryTest {
     private PlanetDao planetDao;
     @Parameterized.Parameter
-    public String planetDeleteName = "Earth";
+    public String planetDeleteName;
 
     @Before
     public void setup() throws IOException, InterruptedException {
