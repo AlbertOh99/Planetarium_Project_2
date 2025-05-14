@@ -37,4 +37,13 @@ public class LoginAPI extends APIFixture{
 
 
     }
+    @Test
+    public void testNegativeLogout(){  //expected status code 401 as per srs, we are getting 400 for logout functionality
+        HashMap data1 = new HashMap<>();
+        data1.put("username","Batman");
+        data1.put("password","Iamthenight1939");
+        given().contentType("application/json").body(data1).when().post("logout").then().statusCode(401).log().all();
+
+
+    }
 }
