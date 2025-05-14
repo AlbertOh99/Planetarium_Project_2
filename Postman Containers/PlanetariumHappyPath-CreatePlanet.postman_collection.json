@@ -1,0 +1,168 @@
+{
+	"info": {
+		"_postman_id": "53e2ff75-9440-42fa-b2e8-a70d31914dbd",
+		"name": "PlanetariumHappyPath:CreatePlanet",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "44867987",
+		"_collection_link": "https://albertoh-4897441.postman.co/workspace/Albert-Oh's-Workspace~d1f6fab4-e032-40e7-8ae4-f775746be130/collection/44867987-53e2ff75-9440-42fa-b2e8-a70d31914dbd?action=share&source=collection_link&creator=44867987"
+	},
+	"item": [
+		{
+			"name": "Login Copy",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"username\":\"Batman\",\r\n    \"password\":\"Iamthenight1939\"\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:8080/login",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"login"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "HappyPathImageCreatePlanet",
+			"event": [
+				{
+					"listen": "prerequest",
+					"script": {
+						"exec": [
+							"try {\r",
+							"    const response = await pm.sendRequest({\r",
+							"        url: \"http://localhost:8080/reset\",\r",
+							"        method: \"POST\"\r",
+							"    });\r",
+							"\r",
+							"    console.log(response.json());\r",
+							"} catch (err) {\r",
+							"    console.error(err);\r",
+							"}"
+						],
+						"type": "text/javascript",
+						"packages": {}
+					}
+				},
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"Status code is 201\", function () {\r",
+							"    pm.response.to.have.status(201);\r",
+							"});"
+						],
+						"type": "text/javascript",
+						"packages": {}
+					}
+				}
+			],
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"planetName\": \"Earthing\",\r\n    \"ownerId\": 1\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:8080/planetarium/user/1/planet",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"planetarium",
+						"user",
+						"1",
+						"planet"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "HappyPathNoImageCreatePlanet",
+			"event": [
+				{
+					"listen": "prerequest",
+					"script": {
+						"exec": [
+							"try {\r",
+							"    const response = await pm.sendRequest({\r",
+							"        url: \"http://localhost:8080/reset\",\r",
+							"        method: \"POST\"\r",
+							"    });\r",
+							"\r",
+							"    console.log(response.json());\r",
+							"} catch (err) {\r",
+							"    console.error(err);\r",
+							"}"
+						],
+						"type": "text/javascript",
+						"packages": {}
+					}
+				},
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"Status code is 201\", function () {\r",
+							"    pm.response.to.have.status(201);\r",
+							"});"
+						],
+						"type": "text/javascript",
+						"packages": {}
+					}
+				}
+			],
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "formdata",
+					"formdata": [
+						{
+							"key": "",
+							"type": "file",
+							"src": "postman-cloud:///1f02f174-c1e1-4ac0-b9cd-7d175c6bb388"
+						}
+					]
+				},
+				"url": {
+					"raw": "http://localhost:8080/planetarium/user/1/planet",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"planetarium",
+						"user",
+						"1",
+						"planet"
+					]
+				}
+			},
+			"response": []
+		}
+	]
+}

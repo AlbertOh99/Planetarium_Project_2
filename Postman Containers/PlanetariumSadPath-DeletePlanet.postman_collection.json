@@ -1,0 +1,180 @@
+{
+	"info": {
+		"_postman_id": "97448792-1a4d-4b2a-9a9c-e397aa8ba9f8",
+		"name": "PlanetariumSadPath:DeletePlanet",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "44867987",
+		"_collection_link": "https://albertoh-4897441.postman.co/workspace/Albert-Oh's-Workspace~d1f6fab4-e032-40e7-8ae4-f775746be130/collection/44867987-97448792-1a4d-4b2a-9a9c-e397aa8ba9f8?action=share&source=collection_link&creator=44867987"
+	},
+	"item": [
+		{
+			"name": "Login Copy",
+			"event": [
+				{
+					"listen": "prerequest",
+					"script": {
+						"exec": [
+							"try {\r",
+							"    const response = await pm.sendRequest({\r",
+							"        url: \"http://localhost:8080/reset\",\r",
+							"        method: \"POST\"\r",
+							"    });\r",
+							"\r",
+							"    console.log(response.json());\r",
+							"} catch (err) {\r",
+							"    console.error(err);\r",
+							"}"
+						],
+						"type": "text/javascript",
+						"packages": {}
+					}
+				}
+			],
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"username\":\"Batman\",\r\n    \"password\":\"Iamthenight1939\"\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:8080/login",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"login"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "SadPathOwnerIdDeletion",
+			"event": [
+				{
+					"listen": "prerequest",
+					"script": {
+						"exec": [
+							"try {\r",
+							"    const response = await pm.sendRequest({\r",
+							"        url: \"http://localhost:8080/reset\",\r",
+							"        method: \"POST\"\r",
+							"    });\r",
+							"\r",
+							"    console.log(response.json());\r",
+							"} catch (err) {\r",
+							"    console.error(err);\r",
+							"}"
+						],
+						"type": "text/javascript",
+						"packages": {}
+					}
+				},
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"Status code is 400\", function () {\r",
+							"    pm.response.to.have.status(400);\r",
+							"})"
+						],
+						"type": "text/javascript",
+						"packages": {}
+					}
+				}
+			],
+			"request": {
+				"method": "DELETE",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": ""
+				},
+				"url": {
+					"raw": "http://localhost:8080/planetarium/owner/5/planet/Earth",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"planetarium",
+						"owner",
+						"5",
+						"planet",
+						"Earth"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "SadPathPlanetNameDeletion",
+			"event": [
+				{
+					"listen": "prerequest",
+					"script": {
+						"exec": [
+							"try {\r",
+							"    const response = await pm.sendRequest({\r",
+							"        url: \"http://localhost:8080/reset\",\r",
+							"        method: \"POST\"\r",
+							"    });\r",
+							"\r",
+							"    console.log(response.json());\r",
+							"} catch (err) {\r",
+							"    console.error(err);\r",
+							"}"
+						],
+						"type": "text/javascript",
+						"packages": {}
+					}
+				},
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"Status code is 400\", function () {\r",
+							"    pm.response.to.have.status(400);\r",
+							"})"
+						],
+						"type": "text/javascript",
+						"packages": {}
+					}
+				}
+			],
+			"request": {
+				"method": "DELETE",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": ""
+				},
+				"url": {
+					"raw": "http://localhost:8080/planetarium/owner/1/planet/Nothing",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"planetarium",
+						"owner",
+						"1",
+						"planet",
+						"Nothing"
+					]
+				}
+			},
+			"response": []
+		}
+	]
+}

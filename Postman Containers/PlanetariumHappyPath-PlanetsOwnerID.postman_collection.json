@@ -1,0 +1,116 @@
+{
+	"info": {
+		"_postman_id": "d9c4630b-323f-4823-8e2c-edb31705cc03",
+		"name": "PlanetariumHappyPath:PlanetsOwnerID",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "44867987",
+		"_collection_link": "https://albertoh-4897441.postman.co/workspace/Albert-Oh's-Workspace~d1f6fab4-e032-40e7-8ae4-f775746be130/collection/44867987-d9c4630b-323f-4823-8e2c-edb31705cc03?action=share&source=collection_link&creator=44867987"
+	},
+	"item": [
+		{
+			"name": "Login",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"username\":\"Batman\",\r\n    \"password\":\"Iamthenight1939\"\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:8080/login",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"login"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "GetPlanetByOwnerID",
+			"event": [
+				{
+					"listen": "prerequest",
+					"script": {
+						"exec": [
+							"try {\r",
+							"    const response = await pm.sendRequest({\r",
+							"        url: \"http://localhost:8080/reset\",\r",
+							"        method: \"POST\"\r",
+							"    });\r",
+							"\r",
+							"    console.log(response.json());\r",
+							"} catch (err) {\r",
+							"    console.error(err);\r",
+							"}"
+						],
+						"type": "text/javascript",
+						"packages": {}
+					}
+				},
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"Status code is 200\", function () {\r",
+							"    pm.response.to.have.status(200);\r",
+							"});"
+						],
+						"type": "text/javascript",
+						"packages": {}
+					}
+				}
+			],
+			"protocolProfileBehavior": {
+				"disableBodyPruning": true
+			},
+			"request": {
+				"auth": {
+					"type": "basic",
+					"basic": [
+						{
+							"key": "password",
+							"value": "Iamthenight1939",
+							"type": "string"
+						},
+						{
+							"key": "username",
+							"value": "Batman",
+							"type": "string"
+						}
+					]
+				},
+				"method": "GET",
+				"header": [],
+				"body": {
+					"mode": "formdata",
+					"formdata": []
+				},
+				"url": {
+					"raw": "http://localhost:8080/planetarium/user/1/planet",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"planetarium",
+						"user",
+						"1",
+						"planet"
+					]
+				}
+			},
+			"response": []
+		}
+	]
+}
