@@ -15,6 +15,7 @@ import java.util.HashMap;
 import java.util.Map;
 
 import static io.restassured.RestAssured.given;
+import static org.hamcrest.core.IsEqual.equalTo;
 
 @RunWith(Parameterized.class)
 public class PlanetDeletionNegativeControllerTest extends APIFixture {
@@ -55,7 +56,8 @@ public class PlanetDeletionNegativeControllerTest extends APIFixture {
                 .when()
                 .delete("planetarium/owner/" + ownerId + "/planet/" + planetName)
                 .then()
-                .statusCode(400);
+                .statusCode(400).contentType("text/plain")
+                .body(equalTo("Invalid planet name"));
     }
 
 }

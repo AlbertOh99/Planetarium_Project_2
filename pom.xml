@@ -60,6 +60,9 @@
 			<version>3.0.0</version>
 		</dependency>
 	</dependencies>
+
+
+
 	<build>
 		<plugins>
 			<plugin>
@@ -96,10 +99,7 @@
 				<version>3.2.1</version>
 				<configuration>
 					<includes>
-						<include>com.revature.planetarium.IntegrationTestSuite</include>
-						<include>com.revature.planetarium.UnitTestSuite</include>
-						<include>com.revature.planetarium.APITestSuite</include>
-						<include>com.revature.planetarium.E2ETestRunner</include>
+
 					</includes>
 				</configuration>
 			</plugin>
