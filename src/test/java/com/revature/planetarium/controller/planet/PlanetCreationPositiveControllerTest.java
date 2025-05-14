@@ -1,6 +1,7 @@
 package com.revature.planetarium.controller.planet;
 
 import com.revature.planetarium.controller.APIFixture;
+import com.revature.planetarium.util.TestUtilities;
 import io.javalin.http.ContentType;
 import io.restassured.response.Response;
 import org.junit.Before;
@@ -10,6 +11,7 @@ import org.junit.runner.RunWith;
 import org.junit.runners.Parameterized;
 
 import javax.imageio.ImageIO;
+import java.awt.*;
 import java.awt.image.BufferedImage;
 import java.awt.image.DataBufferByte;
 import java.io.File;
@@ -28,23 +30,25 @@ public class PlanetCreationPositiveControllerTest extends APIFixture {
     private Map<String, Object> planetInfo;
     private Map<String, String> loginInfo;
 
-    @Parameterized.Parameter(0)
+    @Parameter(0)
     public String planetName;
 
-    @Parameterized.Parameter(1)
+    @Parameter(1)
     public int ownerId;
 
-    @Parameterized.Parameter(2)
-    public byte[] imageData;
+    @Parameter(2)
+    public String imageData;
 
-    @Parameterized.Parameters
+
+    @Parameters
     public static Object[][] inputs() throws IOException{
         return new Object[][]{
-                {"E", 1, convertToByte(ImageIO.read(new File("src/test/resources/Celestial-Images/planet-1.jpg")))},
-                {"E", 1, convertToByte(ImageIO.read(new File("src/test/resources/Celestial-Images/planet-5.png")))},
-                {"ThePlanetNameIs30CharactersNow", 1, convertToByte(ImageIO.read(new File("src/test/resources/Celestial-Images/planet-1.jpg")))},
-                {"E-arth_3", 1, convertToByte(ImageIO.read(new File("src/test/resources/Celestial-Images/planet-1.jpg")))},
-                {"E", 1, null}
+                {"E", 1, null},
+                {"ThePlanetNameIs30CharactersNow", 1, null},
+                {"E-arth _3", 1, null},
+                {"Earth2", 1, null},
+                {"E", 1, "compressed.jpg"},
+                {"E", 1, "compressed.png"}
         };
     }
 
@@ -63,7 +67,6 @@ public class PlanetCreationPositiveControllerTest extends APIFixture {
         this.planetInfo = new HashMap<>();
         this.planetInfo.put("planetName", planetName);
         this.planetInfo.put("ownerId", ownerId);
-        this.planetInfo.put("imageData", Arrays.toString(imageData));
     }
 
 
@@ -77,11 +80,24 @@ public class PlanetCreationPositiveControllerTest extends APIFixture {
 
         Map<String, String> cookies = loginResponse.getCookies();
 
-        given().contentType(ContentType.JSON).body(planetInfo)
-                .cookies(cookies)
-                .when()
-                .post("planetarium/user/"+ownerId+"/planet")
-                .then()
-                .statusCode(201);
+        if(imageData == null){
+            given().contentType(ContentType.JSON).body(planetInfo)
+                    .cookies(cookies)
+                    .when()
+                    .post("planetarium/user/"+ownerId+"/planet")
+                    .then()
+                    .statusCode(201);
+        }
+        else {
+            given()
+                    .multiPart("planetName", planetName)
+                    .multiPart("ownerId", String.valueOf(ownerId))
+                    .multiPart("imageData", imageData)
+                    .cookies(cookies)
+                    .when()
+                    .post("planetarium/user/" + ownerId + "/planet")
+                    .then()
+                    .statusCode(201);
+        }
     }
 }
