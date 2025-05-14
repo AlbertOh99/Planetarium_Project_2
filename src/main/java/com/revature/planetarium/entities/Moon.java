@@ -19,13 +19,15 @@ public class Moon {
         this.ownerId = planetId;
     }
 
-    public Moon(int id, String name, int planetId, byte[] imageData){
+    public Moon(int id, String name, int planetId, byte[] imageData) {
         this.moonId = id;
         this.moonName = name;
         this.ownerId = planetId;
         this.imageData = imageData;
     }
-    
+
+
+
     public int getMoonId() {
         return moonId;
     }
